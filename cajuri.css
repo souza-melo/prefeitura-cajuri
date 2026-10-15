@@ -1,0 +1,717 @@
+/* =========================================================
+   PREFEITURA MUNICIPAL DE CAJURI / MG — CSS único (injeção)
+   Classes próprias com prefixo caj-, tudo escopado sob .nu.
+   Sem JavaScript próprio: contraste e parallax são só CSS.
+   ========================================================= */
+
+.nu {
+    /* Cores */
+    --caj-azul: #1B1F78;
+    --caj-azul-escuro: #12155A;
+    --caj-azul-claro: #DBEAFE;
+    --caj-laranja: #F19727;
+    --caj-laranja-hover: #DD8418;
+    --caj-divisor: #9FB3EF;
+
+    /* Texto */
+    --caj-titulo: #1F2937;
+    --caj-texto: #333333;
+    --caj-meta: #4B5563;
+    --caj-rotulo: #374151;
+    --caj-branco: #FFFFFF;
+
+    /* Fundos */
+    --caj-fundo: #FFFFFF;
+    --caj-fundo-cinza: #F3F4F6;
+    --caj-fundo-video: #EEEEEE;
+
+    /* Tipografia: pilha padrão do sistema, como no original */
+    --caj-fonte: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* Efeitos */
+    --caj-transicao: all .3s ease-out;
+    --caj-sombra-card: 0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+    --caj-raio: 8px;
+    --caj-pilula: 9999px;
+
+    font-family: var(--caj-fonte);
+    color: var(--caj-titulo);
+    -webkit-font-smoothing: antialiased;
+}
+.nu a { text-decoration: none; }
+.nu img { max-width: 100%; }
+
+/* Containers do original: 1140 (1110 úteis) e 1200 (1170 úteis) */
+.nu .caj-container,
+.nu .caj-container-larga {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.nu .caj-container { max-width: 1140px; }
+.nu .caj-container-larga { max-width: 1200px; }
+
+/* ---------- Contraste (checkbox + :has, sem JS) ---------- */
+.nu .caj-contraste-chk {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+.nu .caj-contraste-chk:focus-visible + .caj-topbar .caj-contraste-btn { outline: 2px solid var(--caj-laranja); outline-offset: 3px; }
+
+/* ---------- Barra superior ---------- */
+.nu .caj-topbar {
+    background: var(--caj-azul);
+    color: var(--caj-branco);
+    font-size: 13px;
+    line-height: 20px;
+}
+.nu .caj-topbar-in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1140px;
+    min-height: 44px;
+    margin: 0 auto;
+}
+.nu .caj-topo-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.nu .caj-topo-links a,
+.nu .caj-contraste-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    color: var(--caj-branco);
+    font-size: 13px;
+    cursor: pointer;
+}
+.nu .caj-topo-links a:hover,
+.nu .caj-contraste-btn:hover { text-decoration: underline; color: var(--caj-branco); }
+.nu .caj-contraste-btn .bi { font-size: 13px; }
+.nu .caj-idiomas { display: flex; align-items: center; gap: 6px; }
+.nu .caj-idiomas img { display: block; width: 24px; height: 18px; object-fit: contain; }
+.nu .caj-idiomas a:hover { text-decoration: none; opacity: .85; }
+.nu .caj-divisor { width: 1px; height: 24px; margin: 0 -4px; background: var(--caj-divisor); }
+
+.nu .caj-topo-dir { display: flex; align-items: center; gap: 12px; }
+.nu .caj-topo-social { display: flex; align-items: center; gap: 12px; }
+.nu .caj-topo-social a { color: var(--caj-branco); font-size: 21px; line-height: 1; }
+.nu .caj-topo-social a:hover { opacity: .8; }
+
+/* Busca (BuscaAvancadaBox) */
+.nu .caj-topbar .busca-avancada-box form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 254px;
+    margin: 0;
+}
+.nu .caj-topbar .busca-avancada-box #busca-avancada-box-input {
+    width: 100%;
+    height: 30px;
+    padding: 0 36px 0 14px;
+    border: 0;
+    border-radius: var(--caj-pilula);
+    background: rgba(255, 255, 255, .2);
+    color: var(--caj-branco);
+    font-family: inherit;
+    font-size: 13px;
+    box-shadow: none;
+    outline: 0;
+}
+.nu .caj-topbar .busca-avancada-box #busca-avancada-box-input::placeholder { color: var(--caj-branco); opacity: 1; }
+.nu .caj-topbar .busca-avancada-box #busca-avancada-box-input:focus { background: rgba(255, 255, 255, .28); }
+.nu .caj-topbar .busca-avancada-box #busca-avancada-box-button {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--caj-branco);
+    font-size: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* ---------- Cabeçalho (logo + menu) ---------- */
+.nu .caj-header { background: var(--caj-fundo); }
+.nu .caj-header > .caj-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+.nu .caj-marca {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
+    color: var(--caj-titulo);
+}
+.nu .caj-marca img { width: auto; height: 70px; }
+.nu .caj-marca-txt { display: flex; flex-direction: column; font-size: 16px; line-height: 21px; font-weight: 700; }
+.nu .caj-marca-txt strong { color: var(--caj-azul); }
+.nu .caj-marca-txt span { color: var(--caj-titulo); }
+
+/* Menu (MenuPortal). O .py-2 do box tem padding fixo de 8px: compensado nas margens. */
+.nu #menunavegacao.nav-cajuri {
+    justify-content: flex-end;
+    margin: 10px 0 -8px;
+}
+.nu #menunavegacao.nav-cajuri .navbar-collapse { justify-content: flex-end; }
+.nu #menunavegacao.nav-cajuri .navbar-nav {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.nu #menunavegacao.nav-cajuri .nav-link {
+    padding: 14px 12px;
+    border-radius: var(--caj-pilula);
+    color: var(--caj-titulo);
+    font-size: 15px;
+    line-height: 21px;
+    font-weight: 400;
+    transition: var(--caj-transicao);
+}
+.nu #menunavegacao.nav-cajuri .nav-link:hover,
+.nu #menunavegacao.nav-cajuri .nav-item.dropdown:hover > .nav-link { color: var(--caj-azul); }
+.nu #menunavegacao.nav-cajuri .dropdown-toggle::after { margin-left: 2px; vertical-align: .2em; border-top-width: .3em; }
+/* Último item do menu = Ouvidoria em pílula laranja */
+.nu #menunavegacao.nav-cajuri .navbar-nav > .nav-item:last-child > .nav-link {
+    background: var(--caj-laranja);
+    color: var(--caj-azul);
+    font-weight: 700;
+}
+.nu #menunavegacao.nav-cajuri .navbar-nav > .nav-item:last-child > .nav-link:hover { background: var(--caj-laranja-hover); }
+.nu #menunavegacao.nav-cajuri .dropdown-menu {
+    padding: 6px 0;
+    border: 0;
+    border-radius: var(--caj-raio);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
+}
+.nu #menunavegacao.nav-cajuri .dropdown-item { padding: 8px 16px; color: var(--caj-titulo); font-size: 14px; }
+.nu #menunavegacao.nav-cajuri .dropdown-item:hover { background: var(--caj-fundo-cinza); color: var(--caj-azul); }
+.nu #menunavegacao.nav-cajuri .navbar-toggler { padding: 6px; border: 0; box-shadow: none; }
+.nu #menunavegacao.nav-cajuri .navbar-toggler i.bi-list { color: var(--caj-azul); font-size: 1.8rem; }
+
+/* Submenus abrem sozinhos ao passar o mouse (desktop). Também abrem pelo
+   teclado (:focus-within). O clique do Bootstrap continua funcionando. */
+@keyframes caj-menu-abrir {
+    from { opacity: 0; translate: 0 6px; }
+    to   { opacity: 1; translate: 0 0; }
+}
+@media (min-width: 992px) {
+    .nu #menunavegacao.nav-cajuri .nav-item.dropdown,
+    .nu #menunavegacao.nav-cajuri .dropdown-menu li { position: relative; }
+    .nu #menunavegacao.nav-cajuri .nav-item.dropdown:hover > .dropdown-menu,
+    .nu #menunavegacao.nav-cajuri .nav-item.dropdown:focus-within > .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+    /* ponte invisível entre o item e o submenu: o hover não se perde no caminho */
+    .nu #menunavegacao.nav-cajuri .nav-item.dropdown > .dropdown-menu::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        right: 0;
+        left: 0;
+        height: 10px;
+    }
+    /* subníveis (se o menu do BackOffice tiver) abrem para o lado direito */
+    .nu #menunavegacao.nav-cajuri .dropdown-menu li:hover > .dropdown-menu,
+    .nu #menunavegacao.nav-cajuri .dropdown-menu li:focus-within > .dropdown-menu {
+        display: block;
+        top: -6px;
+        left: 100%;
+        margin: 0;
+    }
+}
+@media (min-width: 992px) and (prefers-reduced-motion: no-preference) {
+    .nu #menunavegacao.nav-cajuri .nav-item.dropdown:hover > .dropdown-menu,
+    .nu #menunavegacao.nav-cajuri .dropdown-menu li:hover > .dropdown-menu { animation: caj-menu-abrir .18s ease-out; }
+}
+
+/* ---------- Hero (foto com parallax em CSS + texto fixo) ----------
+   A foto é uma camada 30% mais alta que o hero. Onde o navegador suporta
+   animação por rolagem (animation-timeline), ela desliza até ±15% do hero;
+   nos demais fica centralizada e parada — mesmo visual, só sem movimento. */
+.nu .caj-hero {
+    position: relative;
+    height: 430px;
+    overflow: hidden;
+    isolation: isolate;
+    background-color: var(--caj-azul);
+    view-timeline-name: --caj-hero;
+}
+.nu .caj-hero-foto {
+    position: absolute;
+    top: -15%;
+    left: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 130%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+}
+.nu .caj-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, .45);
+    pointer-events: none;
+}
+@keyframes caj-parallax {
+    from { transform: translate3d(0, -11.5%, 0); }
+    to   { transform: translate3d(0, 11.5%, 0); }
+}
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .nu .caj-hero-foto {
+            animation: caj-parallax linear both;
+            animation-timeline: --caj-hero;
+            animation-range: cover 0% cover 100%;
+        }
+    }
+}
+
+.nu .caj-hero-conteudo {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px 0;
+    color: var(--caj-branco);
+    text-align: center;
+}
+.nu .caj-hero-conteudo h1 {
+    margin: 0 0 8px;
+    color: var(--caj-branco);
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+}
+.nu .caj-hero-conteudo p {
+    margin: 0 0 24px;
+    color: var(--caj-branco);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 600;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+}
+.nu .caj-btn-hero {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: var(--caj-pilula);
+    background: var(--caj-fundo);
+    color: var(--caj-titulo);
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1);
+    transition: var(--caj-transicao);
+}
+.nu .caj-btn-hero:hover { background: var(--caj-azul-claro); color: var(--caj-azul); }
+
+/* ---------- Seções ---------- */
+.nu .caj-secao { padding: 43px 0 64px; background: var(--caj-fundo); }
+.nu .caj-noticias { padding-bottom: 44px; background: var(--caj-fundo-cinza); }
+.nu .caj-tv { padding-bottom: 75px; }
+.nu .caj-secao-titulo { margin-bottom: 32px; text-align: center; }
+.nu .caj-secao-titulo h2 {
+    margin: 0 0 16px;
+    color: var(--caj-titulo);
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 700;
+}
+.nu .caj-secao-titulo p { margin: 0; color: var(--caj-meta); font-size: 14px; line-height: 20px; }
+.nu .caj-secao-acao { margin-top: 35px; text-align: center; }
+.nu .caj-tv .caj-secao-acao { margin-top: 24px; }
+
+.nu .caj-btn {
+    display: inline-block;
+    padding: 14px 31px;
+    border-radius: var(--caj-pilula);
+    background: var(--caj-azul);
+    color: var(--caj-branco);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+    transition: var(--caj-transicao);
+}
+.nu .caj-btn:hover { background: var(--caj-azul-escuro); color: var(--caj-branco); }
+.nu .caj-btn-caixa-alta { padding: 13px 24px; text-transform: uppercase; }
+
+/* Serviços ao Cidadão */
+.nu .caj-servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    margin: 0;
+    padding: 5px 0 0;  /* padding (e nao margin): a margem colapsaria com a do titulo */
+    list-style: none;
+}
+.nu .caj-servicos-grid a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--caj-rotulo);
+    text-align: center;
+}
+.nu .caj-servico-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--caj-azul-claro);
+    transition: var(--caj-transicao);
+}
+.nu .caj-servico-icone svg {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: var(--caj-azul);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.nu .caj-servico-nome { margin-top: 18px; font-size: 16px; line-height: 24px; }
+.nu .caj-servicos-grid a:hover .caj-servico-icone { background: var(--caj-azul); }
+.nu .caj-servicos-grid a:hover .caj-servico-icone svg { stroke: var(--caj-branco); }
+.nu .caj-servicos-grid a:hover .caj-servico-nome { color: var(--caj-azul); }
+
+/* Últimas Notícias (MateriaBox list-static) */
+.nu .caj-noticias .materia-box-static > h3 { display: none; }
+.nu .caj-noticias .materia-box .list-group {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    border-radius: 0;
+}
+.nu .caj-noticias .materia-box-static-item.list-group-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0 0 20px;
+    border: 0;
+    border-radius: var(--caj-raio);
+    background: var(--caj-fundo);
+    color: var(--caj-texto);
+    box-shadow: var(--caj-sombra-card);
+    overflow: hidden;
+    transition: var(--caj-transicao);
+}
+.nu .caj-noticias .materia-box-static-item.list-group-item:hover {
+    background: var(--caj-fundo);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+}
+.nu .caj-noticias .materia-box-static-image {
+    width: 100%;
+    margin: 0 0 16px;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+.nu .caj-noticias .materia-box-static-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* o wrapper do título vem com .mb-1 (4px fixos do Bootstrap): o h4 completa até 8px */
+.nu .caj-noticias .materia-box-static-title { padding: 0 14px; }
+.nu .caj-noticias .materia-box-static-title h4 {
+    margin: 0 0 4px;
+    color: var(--caj-titulo);
+    font-size: 18px;
+    line-height: 1.25;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.nu .caj-noticias .materia-box-headline {
+    margin: 0;
+    padding: 0 14px;
+    color: var(--caj-texto);
+    font-size: 14px;
+    line-height: 1.625;
+}
+.nu .caj-noticias .materia-box-static-caption,
+.nu .caj-noticias .materia-box-static .bt-vejamais { display: none; }
+/* "Leia mais →" no pé do card (o card inteiro já é o link da notícia) */
+.nu .caj-noticias .materia-box-static-item.list-group-item::after {
+    content: "Leia mais \2192";
+    margin-top: auto;
+    padding: 12px 16px 0;
+    color: var(--caj-azul);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+/* TV Prefeitura (YouTubeBox list-static) — grade de 5 colunas como no original */
+.nu .caj-tv .youtube-box-static {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 30px;
+    padding-top: 13px;  /* padding: margem colapsaria com a do titulo */
+}
+.nu .caj-tv .youtube-box-static-item { min-width: 0; }
+.nu .caj-tv .youtube-box-player-wrapper {
+    border-radius: var(--caj-raio);
+    background: var(--caj-fundo-video);
+    aspect-ratio: 3 / 5;
+    overflow: hidden;
+}
+.nu .caj-tv .youtube-box-player-wrapper iframe,
+.nu .caj-tv .youtube-box-player-wrapper .youtube-video,
+.nu .caj-tv .youtube-box-player-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+}
+.nu .caj-tv .youtube-box-caption { display: none; }
+
+/* ---------- Rodapé ---------- */
+.nu .caj-rodape {
+    padding: 40px 0 28px;
+    background: var(--caj-azul);
+    color: var(--caj-branco);
+    font-size: 13px;
+}
+.nu .caj-rodape-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+}
+.nu .caj-rodape-marca { display: flex; align-items: center; gap: 9px; color: var(--caj-branco); }
+.nu .caj-rodape-marca img { width: auto; height: 40px; }
+.nu .caj-rodape-marca strong { font-size: 15px; line-height: 19px; font-weight: 700; }
+.nu .caj-rodape-endereco { margin: 22px 0 0; color: var(--caj-branco); font-size: 13px; line-height: 20px; }
+.nu .caj-rodape-titulo { margin: 0 0 8px; color: var(--caj-branco); font-size: 18px; line-height: 28px; font-weight: 700; }
+.nu .caj-rodape-links { margin: 0; padding: 0; list-style: none; }
+.nu .caj-rodape-links li { line-height: 23.7px; }
+.nu .caj-rodape-links a,
+.nu .caj-rodape-contato a { color: var(--caj-branco); }
+.nu .caj-rodape-links a:hover,
+.nu .caj-rodape-contato a:hover { text-decoration: underline; }
+.nu .caj-rodape-contato { margin: 0 0 16px; color: var(--caj-branco); font-size: 13px; line-height: 20px; }
+.nu .caj-rodape-social { display: flex; gap: 8px; }
+.nu .caj-rodape-social a { color: var(--caj-branco); font-size: 20px; line-height: 1; }
+.nu .caj-rodape-social a:hover { opacity: .8; }
+.nu .caj-rodape-radar { display: inline-block; }
+.nu .caj-rodape-radar img { display: block; width: 280px; height: auto; }
+.nu .caj-rodape-base {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding: 20px 16px 0;
+    border-top: 1px solid var(--caj-divisor);
+}
+.nu .caj-rodape-copy { margin: 0; color: var(--caj-laranja); font-size: 13px; line-height: 20px; }
+.nu .caj-rodape-copy-sep { display: inline-block; width: 1px; height: 14px; margin: 0 6px; background: var(--caj-laranja); vertical-align: -2px; }
+/* Logo Portal Fácil no fim da barra do rodapé */
+.nu .caj-rodape-fim { display: flex; align-items: center; gap: 16px; }
+
+/* Botão "Voltar ao topo": fixo no canto inferior direito da tela.
+   Onde há animação por rolagem (animation-timeline: scroll()), ele surge
+   depois dos primeiros 300px rolados; sem suporte, fica sempre visível. */
+.nu .caj-voltar-topo {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--caj-laranja);
+    color: var(--caj-azul);
+    font-size: 19px;
+    line-height: 1;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .28);
+    transition: background-color .3s ease-out, transform .3s ease-out;
+}
+.nu .caj-voltar-topo .bi { -webkit-text-stroke: .6px currentColor; }
+.nu .caj-voltar-topo:hover,
+.nu .caj-voltar-topo:focus-visible {
+    background: var(--caj-laranja-hover);
+    color: var(--caj-azul);
+    transform: translateY(-3px);
+}
+.nu .caj-voltar-topo:focus-visible { outline: 2px solid var(--caj-azul); outline-offset: 3px; }
+@keyframes caj-surgir {
+    from { opacity: 0; visibility: hidden; translate: 0 12px; }
+    to   { opacity: 1; visibility: visible; translate: 0 0; }
+}
+@supports (animation-timeline: scroll()) {
+    .nu .caj-voltar-topo {
+        animation: caj-surgir linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 150px 300px;
+    }
+}
+/* rolagem suave até o topo (só na página que tem o layout; respeita "reduzir movimento") */
+@media (prefers-reduced-motion: no-preference) {
+    html:has(.nu #caj-topo) { scroll-behavior: smooth; }
+}
+
+/* Logo Portal Fácil: mostra só o ícone e expande para o logotipo completo no hover */
+.nu .footer-portalfacil-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.nu .footer-portalfacil-logo a {
+    display: block;
+    overflow: hidden;
+    width: 23px;
+    transition: width .4s ease;
+}
+.nu .footer-portalfacil-logo a:hover,
+.nu .footer-portalfacil-logo a:focus-visible { width: 139px; }
+.nu .footer-portalfacil-logo img {
+    display: block;
+    width: 139px;
+    max-width: none;
+    height: 26px;
+    object-fit: contain;
+    object-position: left;
+    opacity: .65;
+    transition: opacity .3s ease;
+}
+.nu .footer-portalfacil-logo a:hover img,
+.nu .footer-portalfacil-logo a:focus-visible img { opacity: 1; }
+
+/* ---------- Alto contraste (ligado pelo botão "Contraste" do topo) ---------- */
+body:has(#caj-contraste:checked) { background: #000; }
+body:has(#caj-contraste:checked) .nu .caj-topbar,
+body:has(#caj-contraste:checked) .nu .caj-header,
+body:has(#caj-contraste:checked) .nu .caj-secao,
+body:has(#caj-contraste:checked) .nu .caj-rodape,
+body:has(#caj-contraste:checked) .nu .materia-box-static-item.list-group-item,
+body:has(#caj-contraste:checked) .nu #menunavegacao.nav-cajuri .dropdown-menu { background: #000; color: #FFF; }
+body:has(#caj-contraste:checked) .nu a,
+body:has(#caj-contraste:checked) .nu label,
+body:has(#caj-contraste:checked) .nu h1,
+body:has(#caj-contraste:checked) .nu h2,
+body:has(#caj-contraste:checked) .nu h3,
+body:has(#caj-contraste:checked) .nu h4,
+body:has(#caj-contraste:checked) .nu p,
+body:has(#caj-contraste:checked) .nu span,
+body:has(#caj-contraste:checked) .nu #menunavegacao.nav-cajuri .nav-link,
+body:has(#caj-contraste:checked) .nu .caj-noticias .materia-box-static-item.list-group-item::after { color: #FF0; }
+body:has(#caj-contraste:checked) .nu .caj-servico-icone,
+body:has(#caj-contraste:checked) .nu .caj-btn,
+body:has(#caj-contraste:checked) .nu .caj-btn-hero,
+body:has(#caj-contraste:checked) .nu #menunavegacao.nav-cajuri .navbar-nav > .nav-item:last-child > .nav-link { border: 1px solid #FF0; background: #000; }
+body:has(#caj-contraste:checked) .nu .caj-servico-icone svg { stroke: #FF0; }
+body:has(#caj-contraste:checked) .nu .caj-voltar-topo { border: 1px solid #FF0; background: #000; color: #FF0; }
+body:has(#caj-contraste:checked) .nu img { filter: grayscale(1) contrast(1.2); }
+
+/* =========================================================
+   RESPONSIVO (1200 / 992 / 768 / 576)
+   ========================================================= */
+@media (max-width: 1199.98px) {
+    .nu .caj-container,
+    .nu .caj-container-larga,
+    .nu .caj-topbar-in { max-width: 960px; }
+    .nu .caj-topbar-in { padding: 0 15px; }
+    .nu #menunavegacao.nav-cajuri .nav-link { padding: 14px 9px; font-size: 14px; }
+}
+
+@media (max-width: 991.98px) {
+    .nu .caj-container,
+    .nu .caj-container-larga,
+    .nu .caj-topbar-in { max-width: 720px; }
+
+    /* Cabeçalho: logo à esquerda, botão do menu à direita, painel em largura total */
+    .nu .caj-header > .caj-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .nu #menunavegacao.nav-cajuri { position: static; margin: 0; }
+    .nu #menunavegacao.nav-cajuri .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        z-index: 1000;
+        max-height: calc(100vh - 140px);
+        padding: 8px 15px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: var(--caj-fundo);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
+    }
+    .nu #menunavegacao.nav-cajuri .navbar-nav { flex-direction: column; align-items: stretch; gap: 2px; }
+    .nu #menunavegacao.nav-cajuri .nav-link { padding: 10px 12px; border-radius: var(--caj-raio); }
+    .nu #menunavegacao.nav-cajuri .navbar-nav > .nav-item:last-child > .nav-link { border-radius: var(--caj-pilula); text-align: center; }
+    .nu #menunavegacao.nav-cajuri .dropdown-menu { padding-left: 12px; box-shadow: none; }
+
+    .nu .caj-servicos-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 32px; }
+    .nu .caj-noticias .materia-box .list-group { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nu .caj-tv .youtube-box-static { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .nu .caj-rodape-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+}
+
+@media (max-width: 767.98px) {
+    .nu .caj-container,
+    .nu .caj-container-larga,
+    .nu .caj-topbar-in { max-width: 540px; }
+
+    .nu .caj-topbar-in { flex-wrap: wrap; justify-content: center; gap: 6px 16px; padding-top: 8px; padding-bottom: 8px; }
+    .nu .caj-topo-links { flex-wrap: wrap; justify-content: center; gap: 10px 14px; }
+    .nu .caj-topo-dir { width: 100%; justify-content: center; }
+    .nu .caj-topbar .busca-avancada-box form { width: 220px; }
+
+    .nu .caj-hero { height: 380px; }
+    .nu .caj-hero-conteudo h1 { font-size: 32px; }
+    .nu .caj-hero-conteudo p { font-size: 16px; line-height: 24px; }
+
+    .nu .caj-secao-titulo h2 { font-size: 26px; line-height: 32px; }
+    .nu .caj-noticias .materia-box .list-group { grid-template-columns: minmax(0, 1fr); }
+    .nu .caj-tv .youtube-box-static { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+
+    .nu .caj-rodape-grid { grid-template-columns: minmax(0, 1fr); }
+    .nu .caj-rodape-base { flex-direction: column; gap: 14px; text-align: center; }
+    .nu .caj-voltar-topo { right: 16px; bottom: 16px; }
+}
+
+@media (max-width: 575.98px) {
+    .nu .caj-marca img { height: 56px; }
+    .nu .caj-marca-txt { font-size: 14px; line-height: 18px; }
+    .nu .caj-servicos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nu .caj-hero { height: 340px; }
+    .nu .caj-hero-conteudo h1 { font-size: 28px; }
+}

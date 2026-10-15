@@ -1,0 +1,135 @@
+PREFEITURA MUNICIPAL DE CAJURI / MG - Injecao de layout no Portal Facil
+Origem: https://cajuri.hom.portalfacil.com.br/ (layout replicado, visual identico)
+Versao v2 (estrutura no esquema do Paineiras - backup da v1 em _backup-v1/)
+==================================================================
+
+OBJETIVO: replicar o layout atual de Cajuri SEM alterar o visual, no formato de
+injecao (HTML + CSS colados no BackOffice), igual ao projeto Paineiras.
+
+PALETA: azul-marinho #1B1F78 + laranja #F19727. Apoio: azul claro #DBEAFE,
+        cinza #F3F4F6, texto #1F2937 / #333 / #4B5563 (paleta Tailwind do original).
+TIPOGRAFIA: pilha padrao do sistema (ui-sans-serif, system-ui, Segoe UI...),
+        a mesma do original - nao carrega fonte externa.
+
+==================================================================
+ARQUIVOS
+==================================================================
+- index_1.html    Home (injecao). Cole em "Importar codigo" (icone download).
+- index_2.html    Paginas internas. Topo/rodape espelhados; <InternalContent>
+                  FORA dos dois wrappers .nu (o portal estiliza o interno).
+- cajuri.css      CSS UNICO (estilo + responsivo juntos). Suba como CSS custom.
+- images/         Brasao, bandeiras, Radar, logo PortalFacil (SVG) e foto do hero
+                  (todas JA EMBUTIDAS em base64 nos index; aqui so como fonte).
+- preview.html    Preview standalone. NAO vai pro portal.
+- PROMPT-MASTER.md  Prompt da migracao.
+- LEIA-ME.txt     Este arquivo.
+- _backup-v1/     Versao anterior (formato template completo, com css/ e js/).
+- _captura/       Recortes do print usados na medicao e nas imagens do preview.
+
+SEM PASTA js/: nao ha JavaScript proprio. O que era JS virou CSS puro:
+- Contraste: checkbox escondido (#caj-contraste) + label "Contraste" no topo;
+  o CSS usa body:has(#caj-contraste:checked). (Nao persiste entre paginas.)
+- Parallax do hero: animacao por rolagem em CSS (animation-timeline). Em
+  navegadores sem suporte a foto fica centralizada e parada (mesmo visual).
+  Respeita prefers-reduced-motion.
+- Idiomas: bandeiras EN/ES abrem o Google Tradutor; PT volta para "/".
+- Ano do rodape: fixo "2026" (atualizar na virada do ano).
+Unico script: <NextScript> do Bootstrap 5.3.3 (menu mobile e dropdowns).
+
+==================================================================
+COMO APLICAR NO PORTAL
+==================================================================
+1. GrapesJS > "Importar codigo" > colar index_1.html na home.
+2. Repetir na pagina interna com index_2.html.
+3. Subir cajuri.css como CSS custom do cliente.
+4. Publicar e conferir no dominio real.
+
+==================================================================
+BOXES (dados reais do portal) - fechamento explicito, nenhum auto-fechado
+==================================================================
+- <BuscaAvancadaBox class="busca-avancada-box" placeholder="palavra-chave">  busca no topo
+- <MenuPortal local="main" class="nav-cajuri">   menu principal (Ouvidoria = ULTIMO
+                                                  item do menu -> vira a pilula laranja)
+- <MateriaBox display-mode="list-static" origin-data="latest" members="I,T,H" size="3"
+              length-title="45" length-headline="70">   Ultimas Noticias
+- <YouTubeBox display-mode="list-static" origin-data="latest" members="I" size="4">  TV Prefeitura
+- <InternalContent> (index_2, fora dos wrappers) + <NextScript> (bootstrap)
+
+==================================================================
+REGRAS DE INJECAO RESPEITADAS
+==================================================================
+- Wrapper class="nu" (nunca id). index_2 com DOIS wrappers, InternalContent fora.
+- Classes proprias com prefixo caj-, tudo escopado sob .nu (nao colide com o tema).
+- Zero comentarios HTML. Sem @import (icones por <link>), sem !important, sem @layer.
+- Imagens em base64 nos index ({BASE_PATH} nao e substituido na injecao).
+- Utilitarios do box com !important do Bootstrap (.py-2 do menu, .mb-1 do titulo
+  da noticia) compensados por margem, sem brigar com !important.
+
+==================================================================
+MEDIDAS DO ORIGINAL (print 1920px)
+==================================================================
+- Topo 44px | cabecalho 148px | hero 430px | conteudo 1110px uteis (container
+  1140) | servicos e rodape 1170px uteis (container 1200).
+- Noticias: 3 cards de 350px, gap 30, imagem 16:10. Videos: grade de 5 colunas
+  (4 videos), proporcao 3:5, gap 30.
+
+==================================================================
+PENDENCIAS (resolver antes de publicar)
+==================================================================
+1. SELOS DE CATEGORIA das noticias (SAUDE/ESPORTE/EDUCACAO): o MateriaBox nao
+   renderiza categoria; sem eles o card fica 34px mais baixo. Ver no DOM ao vivo.
+2. IMAGENS recortadas do print (bandeiras e Radar) em baixa
+   resolucao: trocar pelos originais e regerar o base64 nos dois index.
+3. DROPDOWNS do menu (Governo/Secretarias): estilo estimado (print sem menu aberto).
+4. PLAYER do YouTubeBox: miniatura/play dependem do player real do portal.
+5. LINKS presumidos: Acessibilidade, E-SIC, servicos, redes sociais, /videos,
+   /pagina/a-cidade. Conferir rotas reais. Bandeiras usam o dominio de
+   homologacao no link do Google Tradutor: trocar pelo dominio oficial.
+6. VLibras e botao de acessibilidade flutuantes: nao incluidos (o portal injeta).
+
+==================================================================
+v2.1 - LOGO PORTAL FACIL NO RODAPE
+==================================================================
+Logo trocado pelo SVG oficial usado em Domingos Martins
+(https://es-dommar-pref-pf-c6dc4-pub.portalfacil.srv.br/), embutido em base64.
+Mesma animacao do Dom Mar: mostra so o icone (19px, opacidade .65) e expande
+para o logotipo completo (139px, opacidade 1) no hover - e tambem no foco do
+teclado (:focus-visible), para acessibilidade. Classe: .footer-portalfacil-logo.
+
+==================================================================
+v2.2 - BRASAO OFICIAL
+==================================================================
+Brasao trocado pelo arquivo oficial enviado (images/brasao.png, 67x70 px,
+fundo transparente), embutido em base64 no topo e no rodape dos dois index.
+Mesma altura de antes (70px no topo, 40px no rodape), largura automatica
+proporcional - sem distorcer. O brasao novo e um pouco mais largo que o
+recorte antigo, entao o texto "Prefeitura Municipal de / Cajuri - MG" fica
+7px mais a direita no topo; a altura do cabecalho nao mudou (148px).
+
+
+==================================================================
+v2.3 - BOTAO "VOLTAR AO TOPO" NO RODAPE
+==================================================================
+Botao redondo laranja (36px, seta azul) na barra final do rodape, ao lado do
+logo Portal Facil. Sem JS: e um link para a ancora #caj-topo (id posto na
+barra superior dos dois index), com rolagem suave por CSS
+(html:has(.nu #caj-topo) { scroll-behavior: smooth }), desligada para quem
+pede "reduzir movimento". Tem foco visivel no teclado e versao em alto
+contraste. No celular fica centralizado abaixo do texto de direitos.
+
+v2.4 - "VOLTAR AO TOPO" FIXO A DIREITA
+Agora o botao fica FIXO no canto inferior direito da tela (24px das bordas;
+16px no celular), 44px de diametro (area de toque confortavel), z-index 1100.
+Continua no HTML do rodape (nada mudou nos index); o position:fixed o prende
+a janela. Ele SURGE so depois que a pagina rola ~150-300px (animacao por
+rolagem em CSS, animation-timeline: scroll()) e some de novo ao voltar ao
+topo. Navegadores sem esse recurso: botao sempre visivel.
+Nao conflita com o botao "Gerenciar cookies" do portal (lado esquerdo).
+
+v2.5 - SUBMENUS ABREM NO HOVER
+No computador (>= 992px) os submenus do menu principal (Governo, Secretarias
+e qualquer item com filhos no BackOffice) abrem sozinhos ao passar o mouse,
+com uma animacao curta; fecham ao tirar o mouse. Tambem abrem pelo teclado
+(Tab, via :focus-within). So CSS. O clique do Bootstrap continua valendo.
+Uma "ponte" invisivel de 10px evita que o submenu feche no caminho do mouse.
+Subniveis abrem para a direita. No celular nada muda (abre pelo toque).
